@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { Button } from "react-bootstrap";
 import UploadFile from '../services/api'
-
+import { Link } from "react-router-dom";
 
 const Upload = () => {
     
@@ -31,7 +31,7 @@ const Upload = () => {
     
     console.log(file)
     return ( 
-        <>
+        <div class = "grad">
         <h1> Upload a File </h1>
         <input type = "file" hidden = { true } ref = { fileInputRef } onChange = {(e)=> {
             setFile(e.target.files[0])  // e.target.files returns an array bcz multiple files can be selected.
@@ -41,8 +41,13 @@ const Upload = () => {
                     Upload a File
             </Button>
         </div>
-        <a href = {result}>{result}</a>
-        </>
+        <div style={{textAlign:"center", padding:100}}>
+            To download and check the file click here :
+            <Button variant="light" type="submit" >
+            <Link to = {result}>Download File</Link>
+          </Button>
+        </div>
+        </div>
     );
 }
  

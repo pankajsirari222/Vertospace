@@ -1,36 +1,33 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 
-import { Container, Row, Col } from "react-bootstrap";
-import noteContext from "../context/notes/noteContext";
+import { Container} from "react-bootstrap";
 
 const About = () => {
   return (
     <>
-      <div>This is About page</div>
-      <section id="about">
+      <div id="about">
         <Container>
-          <Row>
-            <Col>
-              <h2>About My College</h2>
+              <h2>About Us</h2>
+              <br/>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                volutpat aliquam urna, sed hendrerit odio hendrerit a. Nam id
-                mauris euismod, pretium nunc ac, lobortis sapien. Morbi euismod
-                tellus eget lorem consectetur, quis porttitor nibh bibendum.
+                Welcome to Vertospace designed for college students!
+                This project is aimed at providing an efficient and
+                user-friendly platform for students to upload and download
+                files, as well as create, read, update and delete their notes.
+                With our intuitive interface, students can easily access and
+                manage their academic resources on our website. To ensure the
+                security of user data, we have implemented a login functionality
+                that requires authentication before accessing any features.
+                Additionally, we have incorporated form validation to ensure
+                that all inputs are accurate and complete. Our MERN Stack
+                project leverages the power of MongoDB, Express, React, and
+                Node.js, making it a robust and scalable solution for managing
+                academic resources. We hope that our project will provide
+                students with a convenient and streamlined experience, enhancing
+                their academic journey.
               </p>
-              <p>
-                Nunc lacinia consectetur pharetra. Integer dapibus nulla at erat
-                venenatis posuere. Duis nec felis ac mauris placerat tincidunt.
-                Proin eleifend nisl nec ante consequat, id auctor quam
-                tincidunt. Integer eu leo eget orci faucibus rutrum non non ex.
-              </p>
-            </Col>
-            <Col>
-              <img src="about-image.jpg" alt="About" />
-            </Col>
-          </Row>
         </Container>
-      </section>
+      </div>
     </>
   );
 };

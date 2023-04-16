@@ -1,4 +1,3 @@
-import CSE427 from "../pages/CSE423";
 import { Link } from "react-router-dom";
 
 function NavBar() {
