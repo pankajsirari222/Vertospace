@@ -1,6 +1,6 @@
 // Mongoose allows us to create and enforce schema, mongodb is schema less
 // Schema is basically a structure of the db
-const mongoose = require('mongoose')    
+import mongoose from "mongoose";   
 // Schema Function
 const Schema = mongoose.Schema
 // Creates a new Schema
@@ -30,4 +30,4 @@ const UserSchema = new Schema({
 
 // Exporting this schema as model -> First parameter is module name, second is schema name.
 // model applies the schema to a model and interacts with collections.
-module.exports = mongoose.model('user', UserSchema)
+export default mongoose.model('user', UserSchema)

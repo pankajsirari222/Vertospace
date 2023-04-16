@@ -4,6 +4,8 @@ import express from 'express'
 import cors from 'cors'
 import router from './routes/routes.js'
 import dbConnection from './database/db.js'
+import auth from './routes/auth.js'
+import notes from './routes/notes.js'
 
 dotenv.config()
 
@@ -17,6 +19,11 @@ app.use(cors())
 
 // Routes
 app.use('/', router )
+// Authentication
+app.use('/api/auth', auth)
+//Notes
+app.use('/api/notes', notes)
+
 
 // Connecting to DB
 dbConnection()
