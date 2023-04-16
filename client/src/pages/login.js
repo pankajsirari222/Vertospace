@@ -1,37 +1,41 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
 export const Login = (props) => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [pass, setPass] = useState("");
+  const [credentials, setCredentials] = useState({email: "", password: ""}) 
+  let navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent Reload
-
-    // !!!POST REQUEST
-    fetch("http://example.com/api/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: pass,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-
-    console.log(email, pass);
+    const response = await fetch("http://localhost:8000/api/auth/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email: credentials.email, password: credentials.password})
+        });
+        const json = await response.json()
+        console.log(json);
+        if (json.success){
+            // Save the auth token and redirect
+            localStorage.setItem('token', json.authtoken); 
+            navigate("/");
+            props.showAlert("Logged In successfully", "success")
+        }
+        else{
+            props.showAlert("Invalid credentials", "danger")
+        }
   };
+  const onChange = (e)=>{
+    setCredentials({...credentials, [e.target.name]: e.target.value})
+}
 
   return (
     <Container
@@ -48,13 +52,11 @@ export const Login = (props) => {
           <Form.Control
             type="email"
             placeholder="Enter email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            value= {credentials.email}
+            onChange={onChange}
+            name="email"
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
+
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -62,9 +64,9 @@ export const Login = (props) => {
           <Form.Control
             type="password"
             placeholder="Enter Password"
-            onChange={(e) => {
-              setPass(e.target.value);
-            }}
+            value={credentials.password}
+            onChange={onChange}
+            name="password"
           />
         </Form.Group>
 

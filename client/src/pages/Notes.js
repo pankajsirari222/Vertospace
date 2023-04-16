@@ -3,7 +3,7 @@ import noteContext from "../context/notes/noteContext";
 import Noteitem from "../components/Noteitem";
 import AddNote from "../components/AddNote";
 import {Container} from 'react-bootstrap'
-const Notes = () => {
+const Notes = (props) => {
   const context = useContext(noteContext);
   const { notes, getNotes, editNote } = context;
   useEffect(() => {
@@ -22,6 +22,8 @@ const Notes = () => {
   const handleClick = (e)=>{ 
     editNote(note.id, note.etitle, note.edescription, note.etag)
     refClose.current.click();
+    props.showAlert("Note Updated", "success")
+
   };
 
   const onChange = (e) => {
@@ -31,7 +33,7 @@ const Notes = () => {
   return (
     <>
       <Container>
-      <AddNote />
+      <AddNote showAlert={props.showAlert}/>
       <button
         ref={ref}
         type="button"
@@ -132,7 +134,7 @@ const Notes = () => {
                 </div>
         {notes.map((note) => {
           return (
-            <Noteitem key={note._id} updateNote={updateNote} note={note} />
+            <Noteitem key={note._id} updateNote={updateNote} showAlert = {props.showAlert} note={note} />
           );
         })}
       </div>

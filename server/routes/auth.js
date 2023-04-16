@@ -10,12 +10,14 @@ import fetchuser from '../middleware/fetchuser.js'
 
 // ROUTE 1 : Create a user using : POST "/api/auth/". Doesnt require auth.  NO LOGIN REQUIRED
 router.post('/createUser',async (req, res)=> {
+  try {
+    let success = false
   console.log(req.body)
   // Find a user email in DB Model
-  let user = await User.findOne({email : req.body.email})
+  let user = await User.findOne({success, email : req.body.email})
   // IF user EMAIL exists already, return error
   if(user) {
-    return res.status(400).json({error : "Email already exists"})
+    return res.status(400).json({success, error : "Email already exists"})
   }
   // ELSe Create a user
 
@@ -39,9 +41,15 @@ router.post('/createUser',async (req, res)=> {
     }
   }
   const authtoken = jwt.sign(data, JWT_SECRET)
-  console.log(authtoken)
-  res.json(user)
-  // res.json({authtoken})
+  // console.log(authtoken)
+  // res.json(user)
+  res.json({success, authtoken})
+  }
+  catch(error) {
+    console.log(error.message);
+    return res.status(500).json({error : "Internal server error"})
+  }
+  
 })
 
 // ROUTE 2 : Authenticate a user  NO LOGIN REQD.
@@ -49,18 +57,20 @@ router.post('/login', async (req, res) => {
   const {email, password} = req.body
   const JWT_SECRET = "Hello 1234"
 
-
+  let success = false
   try {
     // Find if email of user exists or not
     let user = await User.findOne({email})
     if(!user) {
+      success = false
       return res.status(400).json({error : "Invalid Credentials"})
     }
 
     // Comparing password
     const passwordCompare = await bcrypt.compare(password, user.password)
     if(!passwordCompare) {
-      return res.status(400).json({error : "Invalid Credentials"})
+      success = false
+      return res.status(400).json({success, error : "Invalid Credentials"})
     }
 
     const data = {
@@ -69,7 +79,8 @@ router.post('/login', async (req, res) => {
       }
     }
     const authtoken = jwt.sign(data, JWT_SECRET)
-    res.json({authtoken})
+    success = true
+    res.json({success, authtoken})
   }
   catch(error) {
     console.log(error.message);

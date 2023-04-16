@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
@@ -8,41 +9,40 @@ import Col from "react-bootstrap/Col";
 
 export const Register = (props) => {
   const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [height, setHeight] = useState("")
-  const [weight, setWeight] = useState("")
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [credentials, setCredentials] = useState({
+    name: "",
+    email: "",
+    phoneNo: "",
+    password: "",
+    cnfpassword: "",
+  });
+  let navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    console.log(name, age, gender, height, weight, email, pass);
-    
-    // fetch("", {
-    //   method : "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name: name,
-    //     age: age,
-    //     gender: gender,
-    //     height: height,
-    //     weight: weight,
-    //     email: email,
-    //     password: pass,
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("Success:", data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
-
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent Reload
+    const { name, email, phoneNo, password } = credentials;
+    const response = await fetch("http://localhost:8000/api/auth/createUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, phoneNo, password }),
+    });
+    const json = await response.json();
+    console.log(json);
+    if (json.success) {
+      // Save the auth token and redirect
+      localStorage.setItem("token", json.authtoken);
+      navigate("/");
+      props.showAlert("Account created successfully", "success")
+    } else {
+      props.showAlert("Invalid credentials", "danger");
+    }
+  };
+  const onChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
   return (
@@ -61,80 +61,31 @@ export const Register = (props) => {
             type="text"
             placeholder="Enter Full Name"
             name="name"
-            onChange={e=> {
-              setName(e.target.value)
-            }}
+            onChange={onChange}
+            minLength={3}
           />
         </Form.Group>
-        <Row>
-        <Col>
-        <Form.Group className="mb-3">
-          <Form.Label>Age</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Age"
-            onChange={e=> {
-              setAge(e.target.value)
-            }}
-          />
-        </Form.Group>
-        </Col>
-        
-        <Col>
-        <Form.Group className="mb-3">
-          <Form.Label>Gender</Form.Label>
-
-          <Form.Control
-            as="select"
-            name="gender"
-            onChange={e=> {
-              setGender(e.target.value)
-            }}
-          >
-            <option value="">Select gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </Form.Control>
-        </Form.Group>
-        </Col>
-        </Row>
-        <Row>
-        <Col>
-        <Form.Group className="mb-3">
-          <Form.Label>Height</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Height in cm"
-            onChange={e=> {
-              setHeight(e.target.value)
-            }}
-          />
-        </Form.Group>
-        </Col>
-        
-        <Col>
-        <Form.Group className="mb-3">
-          <Form.Label>Weight</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Weight in kg"
-            onChange={e=> {
-              setWeight(e.target.value)
-            }}
-          />
-        </Form.Group>
-        </Col>
-        </Row>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
             placeholder="Enter email"
-            onChange={e=> {
-              setEmail(e.target.value)
-            }}
+            onChange={onChange}
+            name="email"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formPhoneNo">
+          <Form.Label>Enter Phone number</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter your phone number"
+            onChange={onChange}
+            name="phoneNo"
+            required
+            minLength={10}
+            maxLength={10}
           />
         </Form.Group>
 
@@ -143,9 +94,22 @@ export const Register = (props) => {
           <Form.Control
             type="password"
             placeholder="Enter Password"
-            onChange={e=> {
-              setPass(e.target.value)
-            }}
+            onChange={onChange}
+            name="password"
+            required
+            minLength={5}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formConfirmPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Enter Password again"
+            onChange={onChange}
+            name="cnfpassword"
+            required
+            minLength={5}
           />
         </Form.Group>
 
