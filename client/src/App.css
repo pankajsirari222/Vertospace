@@ -1,6 +1,9 @@
 .heading {
     font-size:60px;
-    font-family:'Times New Roman', Times, serif
+    font-family:'Times New Roman', Times, serif;
+    display: flex;
+    justify-content: center;
+    padding: 160px 0;
 }
 .heading2 {
     font-family:'Times New Roman', Times, serif;
@@ -8,13 +11,17 @@
     justify-content: center;
 }
 #footer {
-    /* position: fixed; */
-    /* padding: 10px 10px 0px 10px; */
-    /* bottom: 0; */
-    /* width: 100%; */
-    /* Height of the footer*/
-    /* height: 100px; */
-    /* background: rgb(207, 42, 42); */
+    position:fixed;
+    bottom: 0px;
+    
+}
+#about {
+    font-size: 18px;
+    line-height: 2;
+    font-family:'Verdana, Geneva, Tahoma, sans-serif';
+    font-weight: bold;
+    text-align: justify;
+    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
 }
 .bg-image {
     background-image: url('./images/earth-g10d0bcba8_1920.jpg');
