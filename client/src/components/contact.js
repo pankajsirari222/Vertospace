@@ -8,13 +8,14 @@ import { SiGmail } from "react-icons/si";
 
 const Contact = () => {
     return ( 
-        <div>
+      <div className="main">
         <Container
-      className="border mt-2 mt-md-4 mt-lg-5"
-      style={{ maxWidth: "600px" }}
-    >
-        <h1 className="heading2">Contact Here</h1>
+      style={{ maxWidth: "35vw" }}
+    > 
+        <br/>
+        <br/>
         <Form>
+        <h1 className="heading2">Contact Here</h1>    
           <Form.Group controlId = "formBasicName">           
           <Form.Label>Name</Form.Label>
           <Form.Control type="text" placeholder="Enter your name" />
@@ -33,17 +34,18 @@ const Contact = () => {
         <Button variant="success" type="submit">Submit
         </Button>
         <br/>
-        <h2 className="heading2"> Also, Connect With Us at... </h2>
+        <h4 className="heading2"> Also, Connect With Us at... </h4>
         <br/>
-      </Form>
-      <div className='d-flex align-items-center'>
-      <IconContext.Provider value={{size: 30}}>
+        <div className='d-flex align-items-center'>
+      <IconContext.Provider value={{size: 20}}>
       <p className="nav-item mx-5 " ><a href="#"><FaTwitter/></a></p>
       <p className="nav-item mx-5"><a href="#"><FaInstagram/></a></p>
       <p className="nav-item mx-5"><a href="#"><FaLinkedin/></a></p>
       <p className="nav-item mx-5"><a href="#"><SiGmail/></a></p>
       </IconContext.Provider>
       </div>
+      </Form>
+      
       </Container>
     </div>
      );

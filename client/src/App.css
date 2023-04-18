@@ -1,3 +1,7 @@
+.main {
+    background-color: #96e6a1;
+    height: 90vh;
+}
 .heading {
     font-size:60px;
     font-family:'Times New Roman', Times, serif;
@@ -10,7 +14,7 @@
     display: flex;
     justify-content: center;
 }
-#footer {
+#footer ul {
     position:fixed;
     bottom: 0px;
     
@@ -32,4 +36,10 @@
 }
 .icon {
     cursor: pointer;
+}
+Form {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+
 }
