@@ -3,14 +3,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 export const Register = (props) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -22,7 +16,12 @@ export const Register = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent Reload
-    const { name, email, phoneNo, password } = credentials;
+    const { name, email, phoneNo, password, cnfpassword } = credentials;
+    if (password !== cnfpassword) {
+      props.showAlert("Passwords do not match", "danger");
+      return;
+    }
+  
     const response = await fetch("http://localhost:8000/api/auth/createUser", {
       method: "POST",
       headers: {
@@ -46,11 +45,8 @@ export const Register = (props) => {
   };
 
   return (
-    <Container
-      className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5"
-      style={{ maxWidth: "400px" }}
-    >
-      <Form onSubmit={handleSubmit}>
+    <div className="register">
+      <Form onSubmit={handleSubmit} className="register-form">
         <Form.Group>
           <h3 className="mt-3">Register</h3>
         </Form.Group>
@@ -109,6 +105,7 @@ export const Register = (props) => {
             onChange={onChange}
             name="cnfpassword"
             required
+            
             minLength={5}
           />
         </Form.Group>
@@ -132,7 +129,7 @@ export const Register = (props) => {
           </Form.Text>
         </Form.Group>
       </Form>
-    </Container>
+    </div>
   );
 };
 export default Register;

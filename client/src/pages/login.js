@@ -3,11 +3,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
 
 export const Login = (props) => {
-  // const [email, setEmail] = useState("");
-  // const [pass, setPass] = useState("");
   const [credentials, setCredentials] = useState({email: "", password: ""}) 
   let navigate = useNavigate()
 
@@ -38,11 +35,8 @@ export const Login = (props) => {
 }
 
   return (
-    <Container
-      className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5"
-      style={{ maxWidth: "400px" }}
-    >
-      <Form onSubmit={handleSubmit}>
+    <div className="login">
+      <Form onSubmit={handleSubmit} className="login-form">
         <Form.Group>
           <h3 className="mt-3">Login Page</h3>
         </Form.Group>
@@ -88,7 +82,7 @@ export const Login = (props) => {
           </Form.Text>
         </Form.Group>
       </Form>
-    </Container>
+    </div>
   );
 };
 

@@ -8,7 +8,6 @@ import PEA from './pages/PEA'
 import Upload from './pages/Upload';
 import Footer from './components/footer';
 import Register from './pages/register';
-import FileList from './services/FileList';
 import Home from './pages/Home';
 import About from './components/About';
 import Contact from './components/contact';
@@ -43,7 +42,6 @@ function App() {
       <Route path="/CSE423" element = { <CSE423/> } />
       <Route path="/PEA" element = { <PEA/> } />
       <Route path="/Upload" element = { <Upload/> } />
-      <Route path="/Download" element = { <FileList/> } />
       <Route path="/contact" element = { <Contact/> } />
       </Routes>
       <Footer/>

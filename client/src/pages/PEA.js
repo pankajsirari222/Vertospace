@@ -5,8 +5,8 @@ function PEA() {
   function handleClick() {}
 
   return (
-    <>
-      <h1 className="text-center my-3">PEA - Analytical Skills</h1>
+    <div className="PEA">
+      <h1 className="text-center mb-3">PEA - Analytical Skills</h1>
       <Row>
         <Col>
           <Card style={{ width: "24rem", margin: "4rem" }}>
@@ -45,7 +45,7 @@ function PEA() {
           </Card>
         </Col>
       </Row>
-    </>
+    </div>
   );
 }
 

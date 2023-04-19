@@ -15,6 +15,7 @@ router.post('/createUser',async (req, res)=> {
   console.log(req.body)
   // Find a user email in DB Model
   let user = await User.findOne({success, email : req.body.email})
+  console.log(user, success)
   // IF user EMAIL exists already, return error
   if(user) {
     return res.status(400).json({success, error : "Email already exists"})
@@ -32,6 +33,12 @@ router.post('/createUser',async (req, res)=> {
     phoneNo : req.body.phoneNo,
   })
 
+  if(user) {
+    success = true;
+  }
+  else  {
+    return res.status(500).json({success, error : "Error while creating user"})
+  }
   // JWT 
   const JWT_SECRET = "Hello 1234"
 
