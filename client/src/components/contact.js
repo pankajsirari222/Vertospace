@@ -18,17 +18,17 @@ const Contact = () => {
         <h1 className="heading2">Contact Here</h1>    
           <Form.Group controlId = "formBasicName">           
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter your name" minLength={3} />
+          <Form.Control type="text" placeholder="Enter your name" minLength={3} required />
           </Form.Group>
         <br/>
          <Form.Group controlId="formBasicEmail">
          <Form.Label>Email</Form.Label>
-         <Form.Control type="email" placeholder="Enter your email"/>
+         <Form.Control type="email" placeholder="Enter your email" required/>
          </Form.Group>
         <br/>
         <Form.Group controlId="formBasicTextArea">
         <Form.Label>Message</Form.Label>
-        <Form.Control as="textarea" rows={3} placeholder="Type your message here..." minLength={4} />
+        <Form.Control as="textarea" rows={3} placeholder="Type your message here..." minLength={8} required/>
         </Form.Group>
         <br/>
         <Button variant="success" type="submit">Submit
