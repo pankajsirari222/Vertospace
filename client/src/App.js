@@ -14,6 +14,7 @@ import Contact from './components/contact';
 import NoteState from './context/notes/noteState';
 import Notes from './pages/Notes';
 import Alert from './components/Alert'
+import UploadedFiles from './pages/UploadedFiles';
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -40,6 +41,7 @@ function App() {
       <Route path="/login" element = { <Login showAlert={showAlert}/> } />
       <Route path="/register" element = { <Register showAlert={showAlert}/> } />
       <Route path="/CSE423" element = { <CSE423/> } />
+      <Route path="/UploadedFiles" element = { <UploadedFiles/> } />
       <Route path="/PEA" element = { <PEA/> } />
       <Route path="/Upload" element = { <Upload/> } />
       <Route path="/contact" element = { <Contact/> } />

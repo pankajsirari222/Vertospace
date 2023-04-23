@@ -8,7 +8,6 @@ export const Login = (props) => {
   const [credentials, setCredentials] = useState({email: "", password: ""}) 
   let navigate = useNavigate()
 
-
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent Reload
     const response = await fetch("http://localhost:8000/api/auth/login", {

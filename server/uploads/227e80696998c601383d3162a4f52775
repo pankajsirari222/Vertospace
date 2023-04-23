@@ -1,0 +1,53 @@
+PostgreSQL :-
+
+create database dbname;
+
+drop database dbname;
+
+To check all the dbs (list of dbs)=>
+\l
+
+COnnect with database =>
+\c dbname
+
+Create schema =>
+create schema schemaName;
+
+To create table with the given schema =>
+create table schemaName.tabName(id int not null, name varchar(20) not null, age int not null, address char(25), marks decimal(5,2), primary key(id));
+
+select * from schemaName.tabName;
+
+NOT NECESSARY TO CREATE THE SCHEMA. WE CAN CREATE TABLE DIRECTLY.
+
+create table tabName(id int, name text, age int, address char(29), marks real);
+
+insert into tabName(id, name, age, address, marks) values(1,'riya', 23, 'jalandhar', 78);
+
+To check Table created or not =>
+\d 
+
+select id, age from tabName;
+
+select count(*) as "records" from tabName;
+
+select * from tabName where marks > 70 and address="jalandhar";
+
+select * from tabName where marks > 70 or id >= 1;
+
+// String starts with ri and can contain any no. of char after that.
+select * from tabName where name like 'ri%';
+
+// After 'ri', it can contain only 1 char.
+select * from tabName where name like 'ri_';
+
+update tabName set age=26 where id=1;
+
+delete from tabName where id= 1;
+
+drop table tabName;
+
+// To import tables
+Files => Preference => Binary Path => Choose version => Path which was used for env variables.
+
+

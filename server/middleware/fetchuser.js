@@ -5,7 +5,7 @@ const fetchuser = (req,res,next)=> {
     // GET the user from jwt token and add id to req
     const token = req.header('auth-token')
     if(!token) {
-        res.status(401).send({error : "Authentiction failed"}) 
+        res.status(401).send({error : "Authentication failed"}) 
     }
     try {
         const data = jwt.verify(token, JWT_SECRET)
@@ -14,7 +14,7 @@ const fetchuser = (req,res,next)=> {
     }
     catch(error) {
         console.log(error.message);
-        res.status(401).send({error : "Authentiction failed"}) 
+        res.status(401).send({error : "Authentication failed"}) 
     }
 }
 

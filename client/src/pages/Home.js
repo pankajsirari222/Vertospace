@@ -14,7 +14,6 @@ const Home = () => {
             <Heading/>
         </Row>
         <Row>
-
         </Row>
         <Row>
 

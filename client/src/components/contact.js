@@ -8,7 +8,7 @@ import { SiGmail } from "react-icons/si";
 
 const Contact = () => {
     return ( 
-      <div className="main">
+      <div className="contact">
         <Container
       style={{ maxWidth: "35vw" }}
     > 
@@ -18,7 +18,7 @@ const Contact = () => {
         <h1 className="heading2">Contact Here</h1>    
           <Form.Group controlId = "formBasicName">           
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter your name" />
+          <Form.Control type="text" placeholder="Enter your name" minLength={3} />
           </Form.Group>
         <br/>
          <Form.Group controlId="formBasicEmail">
@@ -28,7 +28,7 @@ const Contact = () => {
         <br/>
         <Form.Group controlId="formBasicTextArea">
         <Form.Label>Message</Form.Label>
-        <Form.Control as="textarea" rows={3} placeholder="Type your message here..."/>
+        <Form.Control as="textarea" rows={3} placeholder="Type your message here..." minLength={4} />
         </Form.Group>
         <br/>
         <Button variant="success" type="submit">Submit

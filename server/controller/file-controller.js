@@ -23,9 +23,9 @@ export const downloadControl = async (req,res) => {
     try {
        const file = await File.findById(req.params.fileId)
        
-    //    if (!file) {
-    //     return res.status(404).send('File not found');
-    //   }
+       if (!file) {
+        return res.status(404).send('File not found');
+      }
       
        file.downloadCount++
 
@@ -38,3 +38,21 @@ export const downloadControl = async (req,res) => {
         return res.status(500).json({error : error.message})
     }
 }
+
+// Search files
+export const searchFiles = async (req,res) => {
+    try {
+       let result = await File.find({
+        "$or": [
+            {name : { $regex : req.params.key }}
+        ]
+       })
+
+       res.send(result)
+    }
+    catch(error) {
+        console.error(error.message)
+        return res.status(500).json({error : error.message})
+    }
+}
+
