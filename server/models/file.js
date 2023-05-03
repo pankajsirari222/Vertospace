@@ -10,10 +10,6 @@ const fileSchema = new Schema({
         type : String,
         required : true
     },
-    // downloadCount : {
-    //     type : Number,
-    //     default : 0
-    // }
 })
 
 const File = model('file', fileSchema)

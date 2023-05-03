@@ -54,7 +54,6 @@ const Upload = () => {
         <Link to = {result}>Click here</Link>
       </Button>
     </div>
-    <p>{result}</p>
 
       </div>
     </div>

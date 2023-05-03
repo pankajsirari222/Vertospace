@@ -87,9 +87,6 @@ const SearchFiles = () => {
           aria-label="Search"
           onChange={handleSearch}
         />
-        {/* <Button variant="outline-success">
-          <AiOutlineSearch className="search-icon" />
-        </Button> */}
       </Form>
         <div className="search-results">
         {file &&

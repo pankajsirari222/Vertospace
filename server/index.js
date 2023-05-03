@@ -6,6 +6,7 @@ import router from './routes/routes.js'
 import dbConnection from './database/db.js'
 import auth from './routes/auth.js'
 import notes from './routes/notes.js'
+import feedback from './routes/feedback.js'
 
 dotenv.config()
 
@@ -21,8 +22,10 @@ app.use(cors())
 app.use('/', router )
 // Authentication
 app.use('/api/auth', auth)
-//Notes
+// Notes
 app.use('/api/notes', notes)
+// Feedback on contact page
+app.use('/contact', feedback)
 
 
 // Connecting to DB

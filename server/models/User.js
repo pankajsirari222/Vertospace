@@ -1,10 +1,9 @@
 // Mongoose allows us to create and enforce schema, mongodb is schema less
 // Schema is basically a structure of the db
 import mongoose from "mongoose";   
-// Schema Function
-const Schema = mongoose.Schema
+
 // Creates a new Schema
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
     name : {
         type : String,
         required : true

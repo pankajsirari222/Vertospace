@@ -9,16 +9,24 @@ export const uploadControl = async (req, res)=> {
     }
 
     try {
+        // let fileExists = await File.findOne({name: fileObj.name});
+        
+        // console.log(fileExists)
+
+        // if(fileExists) {
+        //     return res.status(400).json({error : "File already exists"})
+        // }
+
         const file = await File.create(fileObj)
-        res.status(200).json({path : `http://localhost:${process.env.PORT}/file/${file._id}`})
+        return res.status(200).json({path : `http://localhost:${process.env.PORT}/file/${file._id}`})
     }
     catch(error) {
         console.log(error.message);
-        response.status(500).json({error : error.message})
+        return res.status(500).json({error : error.message})
     }
 }
 
-// Downlaoad file
+// Download file
 export const downloadControl = async (req,res) => {
     try {
        const file = await File.findById(req.params.fileId)
@@ -27,8 +35,6 @@ export const downloadControl = async (req,res) => {
         return res.status(404).send('File not found');
       }
       
-       file.downloadCount++
-
        await file.save()
 
        res.download(file.path, file.name)
@@ -44,7 +50,7 @@ export const searchFiles = async (req,res) => {
     try {
        let result = await File.find({
         "$or": [
-            {name : { $regex : req.params.key }}
+            {name: { $regex: new RegExp(req.params.key, "i") }}
         ]
        })
 
